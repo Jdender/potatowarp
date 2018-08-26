@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "locale": "en",
+        "target": "es2018",
+        "lib": [ "es2017" ],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "dist",
+        "sourceMap": true,
+        "sourceRoot": "src",
+        "strict": true,
+        "strictPropertyInitialization": false,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "resolveJsonModule": true
+    },
+    "include": [ "./src/**/*" ],
+    "exclude": [ "node_modules" ]
+}
