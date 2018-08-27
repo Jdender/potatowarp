@@ -27,6 +27,9 @@ import { Container } from 'typedi';
 
     const app = express();
 
+    app.set('view engine', 'ejs');
+    app.set('views', __dirname);
+
     useExpressServer(app, {
         controllers: [
             __dirname + '/**/*.ctrl.ts',
