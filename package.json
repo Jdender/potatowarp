@@ -6,16 +6,18 @@
   "author": "Jdender~ <jdenderplays@gmail.com>",
   "license": "AGPL-3.0",
   "scripts": {
-    "dev": "ts-node ."
+    "dev": "ts-node --files ."
   },
   "dependencies": {
     "class-transformer": "^0.1.9",
     "class-validator": "^0.9.1",
+    "ejs": "^2.6.1",
     "express": "^4.16.3",
+    "flakeid": "^0.3.1",
     "reflect-metadata": "^0.1.12",
     "routing-controllers": "^0.7.7",
     "sqlite3": "^4.0.2",
-    "typedi": "^0.8.0",
+    "typedi": "^0.7.2",
     "typeorm": "^0.2.7",
     "typeorm-routing-controllers-extensions": "^0.2.0",
     "typeorm-typedi-extensions": "^0.2.1"
