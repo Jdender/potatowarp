@@ -4,6 +4,10 @@ import express = require('express');
 import { createConnection, useContainer as useContainerOrm } from 'typeorm';
 import { useExpressServer, useContainer as useContainerRouting } from 'routing-controllers';
 import { Container } from 'typedi';
+import session = require('express-session')
+import createStore = require('connect-sqlite3');
+
+const SQLiteStore = createStore(session);
 
 /*
 .ctrl.ts = controller
@@ -29,6 +33,17 @@ import { Container } from 'typedi';
 
     app.set('view engine', 'ejs');
     app.set('views', __dirname);
+
+    app.use(session({
+        store: new SQLiteStore({
+            table: 'sessions',
+            dir: joinPath(__dirname, '../.data'),
+        }),
+        name: 'session_uid',
+        secret: 'somerandonstuffs',
+        resave: false,
+        saveUninitialized: true,
+    }));
 
     useExpressServer(app, {
         controllers: [
