@@ -1,0 +1,44 @@
+{% extends "templates/base.njk" %}
+
+{% block title %}Login{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="simple-form.css"/>
+{% endblock %}
+
+{% block body %}
+<h1>Signup</h1>
+
+<form action="/signup" method="POST">
+    <ul class="simple-form">
+        <li>
+            <label for="username">Username:</label>
+            <input id="username" type="text"/>
+        </li>
+
+        <li>
+            <label for="displayName">Display Name:</label>
+            <input id="displayName" type="text"/>
+        </li>
+
+        <li>
+            <label for="email">Email:</label>
+            <input id="email" type="email"/>
+        </li>
+
+
+        <li>
+            <label for="password">Password:</label>
+            <input id="password" type="password"/>
+        </li>
+
+        <li>
+            <label for="retype">Retype:</label>
+            <input id="retype" type="password"/>
+        </li>
+
+
+        <input type="submit"/>
+    </ul>
+</form>
+{% endblock %}
