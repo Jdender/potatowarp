@@ -6,6 +6,7 @@ import { useExpressServer, useContainer as useContainerRouting } from 'routing-c
 import { Container } from 'typedi';
 import session = require('express-session')
 import createStore = require('connect-sqlite3');
+import { configure as nunjucks } from 'nunjucks';
 
 const SQLiteStore = createStore(session);
 
@@ -31,8 +32,13 @@ const SQLiteStore = createStore(session);
 
     const app = express();
 
-    app.set('view engine', 'ejs');
-    app.set('views', __dirname);
+    app.use(express.static(joinPath(__dirname, './public')));
+    
+    app.set('view engine', 'njk');
+    nunjucks(__dirname, {
+        autoescape: true,
+        express: app,
+    });
 
     app.use(session({
         store: new SQLiteStore({
