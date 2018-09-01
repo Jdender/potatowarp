@@ -1,0 +1,16 @@
+{% extends "templates/base.njk" %}
+
+{% block title %}Main{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+    {% if user %}
+        {{ user.name }}
+        <a href="/logout">Logout</a>
+    {% else %}
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a>
+    {% endif %}
+{% endblock %}
