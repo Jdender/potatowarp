@@ -1,4 +1,4 @@
-import { JsonController, Get, Post, Render, BodyParam, UnauthorizedError, UseBefore, NotFoundError, Req } from 'routing-controllers';
+import { Controller, Get, Post, Render, BodyParam, UnauthorizedError, UseBefore, NotFoundError, Req } from 'routing-controllers';
 import { Repository } from 'typeorm';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import { User } from './User.enti';
@@ -8,8 +8,8 @@ import { Request } from 'express';
 
 const required = true;
 
-@JsonController()
-export class UsersCtrl {
+@Controller()
+export class LoginCtrl {
 
     @InjectRepository(User)
     private users: Repository<User>;
@@ -27,21 +27,22 @@ export class UsersCtrl {
         @BodyParam('username', { required }) username: string,
         @BodyParam('password', { required }) password: string,
     ) {
+        // User
         const user = await this.users.findOne({ username });
 
         if (!user) throw new NotFoundError('User not found');
 
+        // Password
         const valid = await compare(password, user.password);
 
         if (!valid) throw new UnauthorizedError('Invalid password');
 
+        // Update session
         request.session!.userId = user.id;
     }
 
-    @Get('/signup')
-    @Render('user/signup')
-    getSignup() {
-        return {};
+    @Post('/logout')
+    postLogout(@Req() request: Request) {
+        delete request.session!.userId;
     }
-
 }
