@@ -7,7 +7,7 @@
 
 {% block body %}
     {% if user %}
-        {{ user.name }}
+        {{ user.username }}
         <a href="/logout">Logout</a>
     {% else %}
         <a href="/login">Login</a>
