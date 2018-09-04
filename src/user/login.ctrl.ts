@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Render, BodyParam, UnauthorizedError, UseBefore, NotFoundError, Req } from 'routing-controllers';
+import { Controller, Get, Post, Render, BodyParam, UnauthorizedError, UseBefore, NotFoundError, Req, Redirect } from 'routing-controllers';
 import { Repository } from 'typeorm';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import { User } from './User.enti';
@@ -22,6 +22,7 @@ export class LoginCtrl {
 
     @Post('/login')
     @UseBefore(urlencoded({ extended: false }))
+    @Redirect('/')
     async postLogin(
         @Req() request: Request,
         @BodyParam('username', { required }) username: string,
@@ -41,8 +42,10 @@ export class LoginCtrl {
         request.session!.userId = user.id;
     }
 
-    @Post('/logout')
+    @Get('/logout')
+    @Redirect('/')
     postLogout(@Req() request: Request) {
-        delete request.session!.userId;
+
+        request.session!.userId = null;
     }
 }
