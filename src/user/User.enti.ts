@@ -34,7 +34,10 @@ export class User {
     private async hashPassword() {
         // If password is raw than hash it
         this.password = this.password.startsWith('=raw=')
-        ? await hash(this.password, saltRounds)
+        ? await hash(
+            this.password.replace(/^=raw=/, ''), 
+            saltRounds,
+        )
         : this.password;
     }
 
