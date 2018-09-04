@@ -1,6 +1,7 @@
-import { Entity, PrimaryColumn, Column, BeforeInsert, BeforeUpdate } from 'typeorm';
+import { Entity, PrimaryColumn, Column, BeforeInsert, BeforeUpdate, OneToMany } from 'typeorm';
 import FlakeId from 'flakeid';
 import { hash } from 'bcrypt';
+import { Thread } from '../thread/Thread.enti';
 
 const userFlake = new FlakeId();
 
@@ -41,4 +42,6 @@ export class User {
         : this.password;
     }
 
+    @OneToMany(type => Thread, thread => thread.author)
+    threads: Thread[];
 }
