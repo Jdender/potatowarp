@@ -1,4 +1,4 @@
-import { Controller, Get, Render, Post, UseBefore } from 'routing-controllers';
+import { Controller, Get, Render, Post, UseBefore, Body, Redirect } from 'routing-controllers';
 import { Repository } from 'typeorm';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 import { EntityFromBody } from 'typeorm-routing-controllers-extensions';
@@ -19,8 +19,9 @@ export class SignupCtrl {
 
     @Post('/signup')
     @UseBefore(urlencoded({ extended: false }))
+    @Redirect('/')
     postSignup(
-        @EntityFromBody({ required: true }) user: User
+        @EntityFromBody({ required: true }) user: User,
     ) {
         // Mark as raw so it gets hashed
         user.password = '=raw='.concat(user.password);
