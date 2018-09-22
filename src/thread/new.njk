@@ -1,0 +1,27 @@
+{% extends "templates/base.njk" %}
+
+{% block title %}New{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="simple-form.css"/>
+{% endblock %}
+
+{% block body %}
+<h1>New Thread</h1>
+
+<form action="/new" method="post">
+    <ul class="simple-form">
+        <li>
+            <label for="title">Title:</label>
+            <input name="title" id="title" type="text"/>
+        </li>
+
+        <li>
+            <label for="content">Content:</label>
+            <input name="content" id="content" type="textarea"/>
+        </li>
+
+        <input type="submit"/>
+    </ul>
+</form>
+{% endblock %}
