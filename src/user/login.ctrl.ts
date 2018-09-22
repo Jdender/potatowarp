@@ -31,12 +31,12 @@ export class LoginCtrl {
         // User
         const user = await this.users.findOne({ username });
 
-        if (!user) throw new NotFoundError('User not found');
+        if (!user) throw new NotFoundError('Invalid username or password');
 
         // Password
         const valid = await compare(password, user.password);
 
-        if (!valid) throw new UnauthorizedError('Invalid password');
+        if (!valid) throw new NotFoundError('Invalid username or password');
 
         // Update session
         request.session!.userId = user.id;
