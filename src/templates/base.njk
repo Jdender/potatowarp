@@ -8,7 +8,7 @@
 
     <title>{% block title %}{% endblock %} - Potatowarp</title>
 
-    <link rel="stylesheet" href="global.css"/>
+    <link rel="stylesheet" href="/global.css"/>
 
     {% block head %}{% endblock %}
 </head>
@@ -17,9 +17,10 @@
 
     <!-- Header -->
     <div class="header">
-        <a href="" class="logo">Potatowarp</a>
+        <a href="/" class="logo">Potatowarp</a>
         <div class="header-right">
             {% if user %}
+                <a href="/new">New Thread</a>
                 <a href="/#">{{ user.username }}</a>
                 <a href="/logout">Logout</a>
             {% else %}
