@@ -1,5 +1,6 @@
 {
-  "name": "cascading-nested-threads",
+  "name": "potatowarp",
+  "description": "A message fourm prototype made in TypeScript.",
   "version": "0.0.0",
   "main": "src/root.ts",
   "repository": "https://github.com/jdenderplays/probable-squid-potato.git",
