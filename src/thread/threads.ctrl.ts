@@ -14,7 +14,6 @@ export class ThreadCtrl {
     async getMain(
         @Session('userId', { required: false }) id: string,
     ) {
-        console.log(id)
         const user = await this.users.findOne({ where: { id } });
 
         return { user };
