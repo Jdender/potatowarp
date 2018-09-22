@@ -1,12 +1,13 @@
 import 'reflect-metadata';
 import { join as joinPath } from 'path';
 import express = require('express');
-import { createConnection, useContainer as useContainerOrm } from 'typeorm';
-import { useExpressServer, useContainer as useContainerRouting } from 'routing-controllers';
+import { createConnection, useContainer as useContainerOrm, getRepository } from 'typeorm';
+import { useExpressServer, useContainer as useContainerRouting, Action } from 'routing-controllers';
 import { Container } from 'typedi';
 import session = require('express-session')
 import createStore = require('connect-sqlite3');
 import { configure as nunjucks } from 'nunjucks';
+import { User } from './user/User.enti';
 
 const SQLiteStore = createStore(session);
 
@@ -55,6 +56,13 @@ const SQLiteStore = createStore(session);
         controllers: [
             __dirname + '/**/*.ctrl.ts',
         ],
+
+        currentUserChecker: (action: Action) => {
+
+            const id = action.request.session.userId;
+            
+            return getRepository(User).findOne({ where: { id } });
+        },
     });
 
     app.listen(8080, () => console.log('Ready on 8080'));
